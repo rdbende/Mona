@@ -80,6 +80,9 @@ impl InitialSetup {
 
     fn next_clicked(&self) {
         println!("{}", self.imp().token_entry.text());
+        self.imp().next_button.set_sensitive(false);
+        self.imp().next_button.set_child(Some(&gtk::Spinner::builder().spinning(true).build()));
+        // do stuff
         self.imp().nav_view.push_by_tag("finished");
     }
 }

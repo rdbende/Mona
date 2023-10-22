@@ -74,6 +74,8 @@ template $InitialSetup : Adw.Bin {
     Adw.NavigationPage {
       title: _("Finished!");
       tag: "finished";
+      can-pop: false;
+
       Adw.ToolbarView {
         [top]
         Adw.HeaderBar {
