@@ -13,13 +13,7 @@ mod imp {
 
     #[derive(Debug, Default, gtk::CompositeTemplate)]
     #[template(resource = "/io/github/rdbende/Mona/window.ui")]
-    pub struct MonaWindow {
-        // Template widgets
-        #[template_child]
-        pub header_bar: TemplateChild<adw::HeaderBar>,
-        #[template_child]
-        pub label: TemplateChild<gtk::Label>,
-    }
+    pub struct MonaWindow {}
 
     #[glib::object_subclass]
     impl ObjectSubclass for MonaWindow {
@@ -45,7 +39,8 @@ mod imp {
 
 glib::wrapper! {
     pub struct MonaWindow(ObjectSubclass<imp::MonaWindow>)
-        @extends gtk::Widget, gtk::Window, gtk::ApplicationWindow, adw::ApplicationWindow,        @implements gio::ActionGroup, gio::ActionMap;
+        @extends gtk::Widget, gtk::Window, gtk::ApplicationWindow, adw::ApplicationWindow,
+        @implements gio::ActionGroup, gio::ActionMap;
 }
 
 impl MonaWindow {

@@ -1,0 +1,68 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $MonaWindow : Adw.ApplicationWindow {
+  default-width: 450;
+  default-height: 550;
+  content: Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar header_bar {
+      [title]
+      Adw.WindowTitle {
+        title: "Mona";
+      }
+
+      [end]
+      MenuButton {
+        primary: true;
+        icon-name: "open-menu-symbolic";
+        tooltip-text: _("Menu");
+        menu-model: primary_menu;
+      }
+    }
+    content: Adw.StatusPage {
+      title: _("Authorize Mona");
+      description: _("Enter your GitHub token to start building software");
+      icon-name: "git-symbolic";
+      Box {
+        orientation: vertical;
+        spacing: 24;
+        margin-start: 12;
+        margin-end: 12;
+
+        ListBox {
+          styles ["boxed-list"]
+
+          Adw.EntryRow {
+            title: _("Enter your token");
+          }
+        }
+
+        Button {
+          label: _("Log In");
+          halign: center;
+          styles ["suggested-action", "pill"]
+        }
+      }
+    };
+  };
+}
+
+menu primary_menu {
+  section {
+    item {
+      label: _("_Preferences");
+      action: "app.preferences";
+    }
+
+    item {
+      label: _("_Keyboard Shortcuts");
+      action: "win.show-help-overlay";
+    }
+
+    item {
+      label: _("_About Mona");
+      action: "app.about";
+    }
+  }
+}

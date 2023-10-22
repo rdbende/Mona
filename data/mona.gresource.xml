@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gresources>
+  <gresource prefix="/io/github/rdbende/Mona">
+    <file preprocess="xml-stripblanks" alias="gtk/help-overlay.ui">resources/ui/shortcuts.ui</file>
+    <file preprocess="xml-stripblanks" alias="window.ui">resources/ui/window.ui</file>
+  </gresource>
+
+  <gresource prefix="/io/github/rdbende/Mona/icons/scalable/actions">
+    <file preprocess="xml-stripblanks" alias="git-symbolic.svg">resources/icons/git-symbolic.svg</file>
+  </gresource>
+</gresources>
