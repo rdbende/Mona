@@ -1,0 +1,4 @@
+data/io.github.rdbende.Mona.desktop.in
+data/io.github.rdbende.Mona.metainfo.xml.in
+data/io.github.rdbende.Mona.gschema.xml
+src/window.ui

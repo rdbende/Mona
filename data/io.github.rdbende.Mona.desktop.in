@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=mona
+Exec=mona
+Icon=io.github.rdbende.Mona
+Terminal=false
+Type=Application
+Categories=GTK;
+StartupNotify=true

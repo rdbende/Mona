@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist gettext-domain="mona">
+	<schema id="io.github.rdbende.Mona" path="/io/github/rdbende/Mona/">
+	</schema>
+</schemalist>
