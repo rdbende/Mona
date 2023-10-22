@@ -7,6 +7,7 @@
 mod application;
 mod config;
 mod window;
+mod views;
 
 use self::application::MonaApplication;
 use self::window::MonaWindow;

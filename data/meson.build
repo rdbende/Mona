@@ -5,7 +5,8 @@ blueprints = custom_target(
   'blueprints',
   input: files(
     'resources/ui/shortcuts.blp',
-    'resources/ui/window.blp'
+    'resources/ui/window.blp',
+    'resources/ui/initial_setup.blp',
   ),
   output: '.',
   command: [find_program('blueprint-compiler'), 'batch-compile', '@OUTPUT@', '@CURRENT_SOURCE_DIR@', '@INPUT@'],

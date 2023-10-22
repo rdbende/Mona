@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-use gtk::prelude::*;
+use crate::views::InitialSetup;
 use adw::subclass::prelude::*;
 use gtk::{gio, glib};
 
@@ -13,7 +13,10 @@ mod imp {
 
     #[derive(Debug, Default, gtk::CompositeTemplate)]
     #[template(resource = "/io/github/rdbende/Mona/window.ui")]
-    pub struct MonaWindow {}
+    pub struct MonaWindow {
+        #[template_child]
+        pub stack: TemplateChild<gtk::Stack>,
+    }
 
     #[glib::object_subclass]
     impl ObjectSubclass for MonaWindow {
@@ -30,7 +33,13 @@ mod imp {
         }
     }
 
-    impl ObjectImpl for MonaWindow {}
+    impl ObjectImpl for MonaWindow {
+        fn constructed(&self) {
+            self.parent_constructed();
+            self.stack.add_child(&InitialSetup::new());
+        }
+    }
+
     impl WidgetImpl for MonaWindow {}
     impl WindowImpl for MonaWindow {}
     impl ApplicationWindowImpl for MonaWindow {}

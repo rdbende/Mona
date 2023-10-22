@@ -1,0 +1,96 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $InitialSetup : Adw.Bin {
+  Adw.NavigationView nav_view {
+    Adw.NavigationPage {
+      title: "Mona";
+      tag: "welcome";
+      Adw.ToolbarView {
+        [top]
+        Adw.HeaderBar {
+          show-title: true;
+
+          [start]
+          Button {
+            icon-name: "help-about-symbolic";
+            action-name: "app.about";
+          }
+        }
+
+        content: Adw.StatusPage {
+          icon-name: "git-symbolic";
+          title: _("Welcome to Mona");
+
+          Button log_in_button {
+            label: _("Log In");
+            halign: center;
+            styles ["suggested-action", "pill"]
+          }
+        };
+      }
+    }
+
+    Adw.NavigationPage {
+      title: _("Log In");
+      tag: "login";
+      Adw.ToolbarView {
+        [top]
+        Adw.HeaderBar {
+          show-title: false;
+        }
+
+        content: Adw.StatusPage {
+          icon-name: "key-symbolic";
+          title: _("Log In");
+          description: _("Enter your GitHub token to start using Mona");
+
+          Box {
+            orientation: vertical;
+            Adw.Clamp {
+              maximum-size: 400;
+              ListBox {
+                margin-bottom: 36;
+                styles ["boxed-list"]
+
+                Adw.EntryRow token_entry {
+                  title: _("Enter token");
+                }
+              }
+            }
+
+            Button next_button {
+              label: _("Next");
+              halign: center;
+              sensitive: false;
+              styles ["suggested-action", "pill"]
+            }
+          }
+        };
+      }
+    }
+
+    Adw.NavigationPage {
+      title: _("Finished!");
+      tag: "finished";
+      Adw.ToolbarView {
+        [top]
+        Adw.HeaderBar {
+          show-title: false;
+        }
+
+        content: Adw.StatusPage {
+          icon-name: "check-round-outline-symbolic";
+          title: _("Login Complete");
+          description: _("You're all set. Let's start building software!");
+
+          Button {
+            label: _("Start Developing");
+            halign: center;
+            styles ["suggested-action", "pill"]
+          }
+        };
+      }
+    }
+  }
+}

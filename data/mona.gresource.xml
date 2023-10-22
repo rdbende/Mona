@@ -3,9 +3,12 @@
   <gresource prefix="/io/github/rdbende/Mona">
     <file preprocess="xml-stripblanks" alias="gtk/help-overlay.ui">resources/ui/shortcuts.ui</file>
     <file preprocess="xml-stripblanks" alias="window.ui">resources/ui/window.ui</file>
+    <file preprocess="xml-stripblanks" alias="initial_setup.ui">resources/ui/initial_setup.ui</file>
   </gresource>
 
   <gresource prefix="/io/github/rdbende/Mona/icons/scalable/actions">
     <file preprocess="xml-stripblanks" alias="git-symbolic.svg">resources/icons/git-symbolic.svg</file>
+    <file preprocess="xml-stripblanks" alias="key-symbolic.svg">resources/icons/key-symbolic.svg</file>
+    <file preprocess="xml-stripblanks" alias="check-round-outline-symbolic.svg">resources/icons/check-round-outline-symbolic.svg</file>
   </gresource>
 </gresources>
