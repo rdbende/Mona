@@ -14,8 +14,18 @@ use crate::MonaWindow;
 mod imp {
     use super::*;
 
-    #[derive(Debug, Default)]
-    pub struct MonaApplication {}
+    #[derive(Debug)]
+    pub struct MonaApplication {
+      pub window: glib::WeakRef<MonaWindow>,
+    }
+
+    impl Default for MonaApplication {
+        fn default() -> Self {
+            Self {
+                window: Default::default(),
+            }
+        }
+    }
 
     #[glib::object_subclass]
     impl ObjectSubclass for MonaApplication {
@@ -30,26 +40,23 @@ mod imp {
             let obj = self.obj();
             obj.setup_gactions();
             obj.set_accels_for_action("app.quit", &["<primary>q"]);
+            obj.set_accels_for_action("app.about", &["F1"]);
         }
     }
 
     impl ApplicationImpl for MonaApplication {
-        // We connect to the activate callback to create a window when the application
-        // has been launched. Additionally, this callback notifies us when the user
-        // tries to launch a "second instance" of the application. When they try
-        // to do that, we'll just present any existing window.
         fn activate(&self) {
-            let application = self.obj();
-            // Get the current window or create one if necessary
-            let window = if let Some(window) = application.active_window() {
-                window
-            } else {
-                let window = MonaWindow::new(&*application);
-                window.upcast()
-            };
+            let app = self.obj();
 
-            // Ask the window manager/compositor to present the window
-            window.present();
+            if let Some(window) = self.window.upgrade() {
+                window.present();
+                return;
+            }
+
+            let window = MonaWindow::new(&*app);
+            self.window.set(Some(&window));
+
+            app.main_window().present();
         }
     }
 
@@ -71,6 +78,10 @@ impl MonaApplication {
             .build()
     }
 
+    pub fn main_window(&self) -> MonaWindow {
+        self.imp().window.upgrade().unwrap()
+    }
+
     fn setup_gactions(&self) {
         let quit_action = gio::ActionEntry::builder("quit")
             .activate(move |app: &Self, _, _| app.quit())
@@ -78,7 +89,11 @@ impl MonaApplication {
         let about_action = gio::ActionEntry::builder("about")
             .activate(move |app: &Self, _, _| app.show_about())
             .build();
-        self.add_action_entries([quit_action, about_action]);
+        let show_main_action = gio::ActionEntry::builder("show-main")
+            .activate(|app: &Self, _, _| app.main_window().switch_to_main_page())
+            .build();
+
+        self.add_action_entries([quit_action, about_action, show_main_action]);
     }
 
     fn show_about(&self) {

@@ -5,6 +5,7 @@
  */
 
 use crate::views::InitialSetup;
+use crate::views::MainView;
 use adw::subclass::prelude::*;
 use gtk::{gio, glib};
 
@@ -16,6 +17,10 @@ mod imp {
     pub struct MonaWindow {
         #[template_child]
         pub stack: TemplateChild<gtk::Stack>,
+        #[template_child]
+        pub login: TemplateChild<InitialSetup>,
+        #[template_child]
+        pub main: TemplateChild<MainView>,
     }
 
     #[glib::object_subclass]
@@ -36,7 +41,6 @@ mod imp {
     impl ObjectImpl for MonaWindow {
         fn constructed(&self) {
             self.parent_constructed();
-            self.stack.add_child(&InitialSetup::new());
         }
     }
 
@@ -57,5 +61,10 @@ impl MonaWindow {
         glib::Object::builder()
             .property("application", application)
             .build()
+    }
+
+    pub fn switch_to_main_page(&self) {
+        let imp = self.imp();
+        imp.stack.set_visible_child(&*imp.main);
     }
 }

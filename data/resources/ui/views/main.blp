@@ -1,0 +1,170 @@
+using Gtk 4.0;
+using Adw 1;
+
+
+Adw.Breakpoint {
+  condition ("max-width: 700sp")
+  setters {
+    split_view.collapsed: true;
+    split_view.sidebar-position: end;
+
+    sidebar_menu_button.visible: false;
+
+    mobile_avatar_button.visible: true;
+    desktop_avatar_button.visible: false;
+
+    open_sidebar_button.visible: true;
+    close_sidebar_button.visible: true;
+
+    sidebar_header.show-title: false;
+    main_header.show-title: true;
+  }
+}
+
+
+template $MainView : Adw.Bin {
+  Adw.OverlaySplitView split_view {
+    min-sidebar-width: 200;
+    sidebar: Adw.NavigationPage {
+      title: "Mona";
+
+      Adw.ToolbarView {
+        [top]
+        Adw.HeaderBar sidebar_header {
+          show-end-title-buttons: false;
+
+          [start]
+          MenuButton desktop_avatar_button {
+            styles ["flat", "circular"]
+
+            Adw.Avatar { size: 26; }
+          }
+
+          [end]
+          MenuButton sidebar_menu_button {
+            icon-name: "open-menu-symbolic";
+            primary: true;
+            menu-model: primary_menu;
+          }
+
+          [end]
+          Button close_sidebar_button {
+            icon-name: "cross-large-symbolic";
+            visible: false;
+          }
+        }
+
+        content: Box {
+          orientation: vertical;
+
+          ListBox sidebar_nav {
+            styles ["navigation-sidebar"]
+
+            Adw.ActionRow home_button {
+              title: _("Home");
+              title-lines: 1;
+              icon-name: "go-home-symbolic";
+            }
+
+            Adw.ActionRow notifs_button {
+              title: _("Notifications");
+              title-lines: 1;
+              icon-name: "bell-outline-symbolic";
+
+              [suffix]
+              Label {
+                valign: center;
+                visible: false;
+                styles ["badge"]
+              }
+            }
+
+            Adw.ActionRow activity_button {
+              title: _("Activity");
+              title-lines: 1;
+              icon-name: "charge-symbolic";
+            }
+
+            Adw.ActionRow explore_button {
+              title: _("Explore");
+              title-lines: 1;
+              icon-name: "explore2-large-symbolic";
+            }
+
+            Adw.ActionRow profile_button {
+              title: _("Profil");
+              title-lines: 1;
+              icon-name: "person-symbolic";
+            }
+          }
+        };
+      }
+    };
+
+    content: Adw.NavigationPage {
+      title: "Mona";
+      Adw.ToolbarView {
+        [top]
+        Box {
+          orientation: vertical;
+
+          Adw.HeaderBar main_header {
+            show-title: false;
+
+            [start]
+            MenuButton mobile_avatar_button {
+              visible: false;
+              popover: Popover {};
+              styles ["flat", "circular"]
+
+              Adw.Avatar { size: 26; }
+            }
+
+            [end]
+            ToggleButton open_sidebar_button {
+              icon-name: "open-menu-symbolic";
+              active: bind-property split_view.show-sidebar bidirectional;
+              visible: false;
+            }
+
+            [end]
+            ToggleButton toggle_search_button {
+              icon-name: "loupe-large-symbolic";
+              active: bind-property search_bar.search-mode-enabled bidirectional;
+            }
+          }
+
+          SearchBar search_bar {
+            key-capture-widget: split_view;
+
+            SearchEntry search_entry{
+              placeholder-text: _("Search GitHub");
+              search-delay: 250;
+            }
+          }
+        }
+
+        Adw.ViewStack stack { styles ["view"] }
+      }
+    };
+  }
+}
+
+menu primary_menu {
+  section {
+    item {
+      label: _("_Preferences");
+      action: "app.preferences";
+    }
+
+    item {
+      label: _("_Keyboard Shortcuts");
+      action: "win.show-help-overlay";
+    }
+
+    item {
+      label: _("_About Mona");
+      action: "app.about";
+    }
+  }
+}

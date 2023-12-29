@@ -22,7 +22,7 @@ template $InitialSetup : Adw.Bin {
           icon-name: "git-symbolic";
           title: _("Welcome to Mona");
 
-          Button log_in_button {
+          Button start_button {
             label: _("Log In");
             halign: center;
             styles ["suggested-action", "pill"]
@@ -60,7 +60,7 @@ template $InitialSetup : Adw.Bin {
               }
             }
 
-            Button next_button {
+            Button login_button {
               label: _("Next");
               halign: center;
               sensitive: false;
@@ -87,8 +87,9 @@ template $InitialSetup : Adw.Bin {
           title: _("Login Complete");
           description: _("You're all set. Let's start building software!");
 
-          Button {
+          Button finish_button {
             label: _("Start Developing");
+            action-name: "app.show-main";
             halign: center;
             styles ["suggested-action", "pill"]
           }
