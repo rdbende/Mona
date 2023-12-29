@@ -2,9 +2,10 @@ pkgdatadir = get_option('prefix') / get_option('datadir') / meson.project_name()
 
 conf = configuration_data()
 conf.set_quoted('VERSION', meson.project_version())
-conf.set_quoted('GETTEXT_PACKAGE', 'mona')
+conf.set_quoted('GETTEXT_PACKAGE', 'io.github.rdbende.Mona')
 conf.set_quoted('LOCALEDIR', get_option('prefix') / get_option('localedir'))
 conf.set_quoted('PKGDATADIR', pkgdatadir)
+conf.set_quoted('APP_ID', 'io.github.rdbende.Mona')
 
 configure_file(
     input: 'config.rs.in',

@@ -8,7 +8,7 @@ use gtk::prelude::*;
 use adw::subclass::prelude::*;
 use gtk::{gio, glib};
 
-use crate::config::VERSION;
+use crate::config::{APP_ID, VERSION};
 use crate::MonaWindow;
 
 mod imp {
@@ -101,10 +101,10 @@ impl MonaApplication {
         let about = adw::AboutWindow::builder()
             .transient_for(&window)
             .application_name("Mona")
-            .application_icon("io.github.rdbende.Mona")
+            .application_icon(APP_ID)
             .developer_name("rdbende")
-            .version(VERSION)
             .developers(vec!["rdbende"])
+            .version(VERSION)
             .build();
 
         about.present();

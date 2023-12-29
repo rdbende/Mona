@@ -13,8 +13,8 @@ blueprints = custom_target(
 )
 
 gnome.compile_resources(
-  'mona',
-  'mona.gresource.xml',
+  'io.github.rdbende.Mona',
+  'io.github.rdbende.Mona.gresource.xml',
   gresource_bundle: true,
   install: true,
   install_dir: pkgdatadir,

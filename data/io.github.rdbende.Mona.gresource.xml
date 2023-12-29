@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gresources>
+  <gresource prefix="/io/github/rdbende/Mona">
+    <file preprocess="xml-stripblanks" alias="gtk/help-overlay.ui">resources/ui/shortcuts.ui</file>
+    <file preprocess="xml-stripblanks" alias="window.ui">resources/ui/window.ui</file>
+    <file preprocess="xml-stripblanks" alias="initial_setup.ui">resources/ui/initial_setup.ui</file>
+    <file preprocess="xml-stripblanks" alias="views/main.ui">resources/ui/views/main.ui</file>
+  </gresource>
+</gresources>
