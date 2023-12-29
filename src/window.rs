@@ -13,7 +13,7 @@ mod imp {
     use super::*;
 
     #[derive(Debug, Default, gtk::CompositeTemplate)]
-    #[template(resource = "/io/github/rdbende/Mona/window.ui")]
+    #[template(resource = "/io/github/rdbende/Mona/ui/window.ui")]
     pub struct MonaWindow {
         #[template_child]
         pub stack: TemplateChild<gtk::Stack>,

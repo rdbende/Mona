@@ -13,7 +13,7 @@ mod imp {
     use super::*;
 
     #[derive(Debug, Default, gtk::CompositeTemplate)]
-    #[template(resource = "/io/github/rdbende/Mona/initial_setup.ui")]
+    #[template(resource = "/io/github/rdbende/Mona/ui/initial_setup.ui")]
     pub struct InitialSetup {
         #[template_child]
         pub nav_view: TemplateChild<adw::NavigationView>,

@@ -11,7 +11,7 @@ mod imp {
     use super::*;
 
     #[derive(Debug, Default, gtk::CompositeTemplate)]
-    #[template(resource = "/io/github/rdbende/Mona/views/main.ui")]
+    #[template(resource = "/io/github/rdbende/Mona/ui/views/main.ui")]
     pub struct MainView {
         #[template_child]
         pub split_view: TemplateChild<adw::OverlaySplitView>,
